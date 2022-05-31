@@ -16,10 +16,6 @@ type repPlayer struct {
 
 func Analyse(pathName string, p0, p1 *Player.Player) error {
 
-	if !(strings.Contains(pathName, "白给") || strings.Contains(pathName, "天梯版")) {
-		return nil
-	}
-
 	r, err := rep.NewFromFile(pathName)
 	if err != nil {
 		fmt.Printf("error reading from file %v, error is %v\n", pathName, err.Error())
