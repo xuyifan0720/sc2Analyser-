@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"strings"
 
 	"github.com/SC2Analyser/Analyser"
@@ -45,6 +46,14 @@ func main() {
 			}
 		}
 	}
-	fmt.Printf("%v wins %d\n", p0.Names[0], p0.Winning)
-	fmt.Printf("%v wins %d\n", p1.Names[0], p1.Winning)
+	resultString := fmt.Sprintf("%v wins %d\n", p0.Names[0], p0.Winning) + fmt.Sprintf("%v wins %d\n", p1.Names[0], p1.Winning)
+	outputFile, err := os.Create("output")
+	if err != nil {
+		panic("can't open output file")
+	}
+	defer outputFile.Close()
+	_, err = outputFile.WriteString(resultString)
+	if err != nil {
+		panic("can't write result")
+	}
 }
